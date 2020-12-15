@@ -1,26 +1,20 @@
-
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import Utils.Util;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+/**
+ * @author CyberGaming424
+ * Description:
+ * This is the solution for day 2 Password Philosophy.
+ * For more info see - https://adventofcode.com/2020/day/2
+ */
+class DayTwo {
 
-public class DayTwo {
-
-    private String[] lines;
+    private ArrayList<String> lines;
 
     public DayTwo(boolean partTwo) {
 
-        try {
-            lines = Files.lines(Path.of("D:\\Advent_Of_code\\src\\main\\resources\\day2.txt")).toArray(String[]::new);
-        } catch (IOException e) {
-            e.printStackTrace();
-            lines = new String[0];
-        }
+        lines = Util.lines("src/main/resources/day2.txt");
 
         if(!partTwo)
             partOne(lines);
@@ -29,9 +23,9 @@ public class DayTwo {
 
     }
 
-    public static void partOne(String[] lines) {
+    public static void partOne(ArrayList<String> lines) {
         int validCount = 0;
-        String regex = "(\\d+)-(\\d+)\\s+(\\w):\\s+(\\w+)";
+        String regex = "(\\d+)-(\\d+)\\s+(\\w):\\s+(\\w+)"; // Pattern (min digit) - (max digit) (key) : (pass)
         for (String line : lines) {
             Matcher m = Pattern.compile(regex).matcher(line);
             if (m.find()) {
@@ -52,7 +46,7 @@ public class DayTwo {
         System.out.println(validCount);
     }
 
-    public static void partTwo(String[] lines) {
+    public static void partTwo(ArrayList<String> lines) {
         int validCount = 0;
         String regex = "(\\d+)-(\\d+)\\s+(\\w):\\s+(\\w+)";
         for (String line : lines) {
